@@ -5,14 +5,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
 
 @Entity(name = "users")
-public class UserDetails{
+public class UserEntity  {
 
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false)
+    private String userId;
 
     @Column(nullable = false)
     private String firstName;
@@ -36,8 +38,16 @@ public class UserDetails{
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long userId) {
+        this.id = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

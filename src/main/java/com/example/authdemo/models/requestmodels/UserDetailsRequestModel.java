@@ -1,6 +1,6 @@
 package com.example.authdemo.models.requestmodels;
 
-public class User {
+public class UserDetailsRequestModel {
 
     private String firstName;
     private String lastName;
