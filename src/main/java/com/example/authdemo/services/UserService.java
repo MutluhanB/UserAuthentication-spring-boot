@@ -1,8 +1,8 @@
 package com.example.authdemo.services;
 
-import com.example.authdemo.dtos.UserDto;
+import com.example.authdemo.shared.dto.UserDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
-
+public interface UserService extends UserDetailsService {
     UserDto createUser(UserDto user);
 }

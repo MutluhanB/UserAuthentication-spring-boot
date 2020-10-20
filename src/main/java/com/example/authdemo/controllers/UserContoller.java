@@ -1,8 +1,7 @@
 package com.example.authdemo.controllers;
 
 
-import com.example.authdemo.UserRepository;
-import com.example.authdemo.dtos.UserDto;
+import com.example.authdemo.shared.dto.UserDto;
 import com.example.authdemo.models.requestmodels.UserDetailsRequestModel;
 import com.example.authdemo.models.responsemodels.UserResponse;
 import com.example.authdemo.services.UserService;
