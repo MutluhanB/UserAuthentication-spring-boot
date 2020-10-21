@@ -2,8 +2,8 @@ package com.example.authdemo.controllers;
 
 
 import com.example.authdemo.shared.dto.UserDto;
-import com.example.authdemo.models.requestmodels.UserDetailsRequestModel;
-import com.example.authdemo.models.responsemodels.UserResponse;
+import com.example.authdemo.models.requestModels.CreateUserRequestModel;
+import com.example.authdemo.models.responseModels.UserResponse;
 import com.example.authdemo.services.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ public class UserContoller {
     }
 
     @PostMapping
-    public UserResponse createUser(@RequestBody UserDetailsRequestModel userDetailsRequestModel){
+    public UserResponse createUser(@RequestBody CreateUserRequestModel createUserRequestModel){
 
         UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetailsRequestModel, userDto);
+        BeanUtils.copyProperties(createUserRequestModel, userDto);
 
         UserDto createdUser = userService.createUser(userDto);
         UserResponse userResponse = new UserResponse();
