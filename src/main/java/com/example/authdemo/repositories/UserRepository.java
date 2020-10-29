@@ -1,4 +1,4 @@
-package com.example.authdemo;
+package com.example.authdemo.repositories;
 
 import com.example.authdemo.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;

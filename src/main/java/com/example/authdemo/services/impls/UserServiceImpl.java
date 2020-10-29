@@ -1,6 +1,6 @@
 package com.example.authdemo.services.impls;
 
-import com.example.authdemo.UserRepository;
+import com.example.authdemo.repositories.UserRepository;
 import com.example.authdemo.shared.Utils;
 import com.example.authdemo.shared.dto.UserDto;
 import com.example.authdemo.entity.UserEntity;
@@ -42,6 +42,16 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(storedUser, userResponse);
 
         return userResponse;
+    }
+
+    @Override
+    public UserDto getUser(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+        if(userEntity == null) { throw new UsernameNotFoundException(email); }
+
+        UserDto returnDto = new UserDto();
+        BeanUtils.copyProperties(userEntity, returnDto);
+        return returnDto;
     }
 
     @Override

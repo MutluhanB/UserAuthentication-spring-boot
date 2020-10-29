@@ -4,7 +4,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTCreator.Builder;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.authdemo.SpringApplicationContext;
 import com.example.authdemo.models.requestModels.SignInUserRequestModel;
+import com.example.authdemo.services.UserService;
+import com.example.authdemo.shared.dto.UserDto;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +30,7 @@ import java.util.Date;
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+
     public AuthenticationFilter(AuthenticationManager authenticationManager){
 
         this.authenticationManager = authenticationManager;
@@ -55,8 +59,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         Algorithm signingAlgorithm = Algorithm.HMAC512(SecurityConstants.TOKEN_SECRET);
         String token = JWT.create().withSubject(email).withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME_MS)).withIssuer("testapp").sign(signingAlgorithm);
 
-        response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+        UserService userService = (UserService) SpringApplicationContext.getBean("userServiceImpl");
 
+        UserDto userDto = userService.getUser(email);
+        response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+        response.addHeader("UserID", userDto.getUserId());
 
 
     }
